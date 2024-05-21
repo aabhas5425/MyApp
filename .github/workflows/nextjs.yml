@@ -30,5 +30,4 @@ jobs:
     steps:
     - name: Deploy to Staging
       run: |
-        # Add commands to deploy Docker containers to staging environment
         echo "Deployment to staging completed successfully."

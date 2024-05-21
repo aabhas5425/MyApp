@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   go-app:
-    image: mydockerhubusername/myapp-go:latest
+    image: aabhas5425/myapp-go:latest
     container_name: go-app
     ports:
       - "8080:8080"
@@ -10,7 +10,7 @@ services:
       - myapp-network
 
   nextjs-app:
-    image: mydockerhubusername/myapp-nextjs:latest
+    image: aabhas545/myapp-nextjs:latest
     container_name: nextjs-app
     ports:
       - "3000:3000"
@@ -18,14 +18,14 @@ services:
       - myapp-network
 
   wordpress:
-    image: mydockerhubusername/myapp-wordpress:latest
+    image: aabhas5425/myapp-wordpress:latest
     container_name: wordpress
     ports:
       - "8000:80"
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_PASSWORD:______
       WORDPRESS_DB_NAME: wordpress
     networks:
       - myapp-network
@@ -38,7 +38,7 @@ services:
     environment:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
+      MYSQL_PASSWORD: ______
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - db_data:/var/lib/mysql
