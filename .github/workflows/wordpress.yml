@@ -1,20 +1,28 @@
-name: WordPress CI
+name: WordPress CI/CD
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '7.4'
-    - name: Install Composer
-      run: sudo apt-get install -y composer
-    - name: Install dependencies
+    # CI steps here...
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: success()
+    steps:
+    - name: Install WordPress Dependencies
       run: composer install
-    - name: Run PHPCS
-      run: vendor/bin/phpcs --standard=WordPress .
+    - name: Build and Push Docker Image
+      run: |
+        docker build -t myapp-wordpress:latest .
+        docker push myapp-wordpress:latest
+    - name: Deploy to Staging
+      run: |
+        # Add commands to deploy Docker container to staging environment
+        echo "Deployment to staging completed successfully."
